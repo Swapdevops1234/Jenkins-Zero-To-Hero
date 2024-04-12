@@ -5,13 +5,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 // This stage checks out the code from your version control system
-                git 'https://github.com/Swapdevops1234/Jenkins-Zero-To-Hero/tree/main/Hello_World_Java.git'
+                git 'https://github.com/Swapdevops1234/Jenkins-Zero-To-Hero.git'
             }
         }
         stage('Build') {
             steps {
                 // This stage compiles your Java code
-                sh 'javac Hello_World_Java/Jenkinsfile'
+                sh 'javac Hello_World_Java/HelloWorld.java'
 
             }
         }
