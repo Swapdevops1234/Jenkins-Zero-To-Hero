@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 // This stage compiles your Java code
-                sh 'javac Hello_World_Java'
+                sh 'javac Hello_World_Java/Jenkinsfile'
 
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 // This stage could include deploying your application to a server
                 // For simplicity, we are just printing "Hello World" here
-                sh 'java HelloWorld'
+                sh 'java Hello_World_Java HelloWorld'
             }
         }
     }
