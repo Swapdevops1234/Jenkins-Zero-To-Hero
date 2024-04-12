@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // This stage checks out the code from your version control system
-                git 'https://github.com/Swapdevops1234/Jenkins-Zero-To-Hero'
+                git 'https://github.com/Swapdevops1234/Jenkins-Zero-To-Hero/tree/main/Hello_World_Java.git'
             }
         }
         stage('Build') {
