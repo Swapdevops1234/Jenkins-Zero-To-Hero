@@ -1,21 +1,42 @@
 pipeline {
-  agent none
-  stages {
-    stage('Back-end') {
-      agent {
-        docker { image 'maven:3.8.1-adoptopenjdk-11' }
-      }
-      steps {
-        sh 'mvn --version'
-      }
+    agent {
+        docker {
+            image 'openjdk:17-jdk'
+            args '-u root:root'   // optional: run as root for easy permissions
+        }
     }
-    stage('Front-end') {
-      agent {
-        docker { image 'node:16-alpine' }
-      }
-      steps {
-        sh 'node --version'
-      }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh '''
+                    echo "Compiling Java..."
+                    mkdir -p out
+                    javac src/HelloWorld.java -d out
+                '''
+            }
+        }
+
+        stage('Run') {
+            steps {
+                sh '''
+                    echo "Running Java program..."
+                    java -cp out HelloWorld
+                '''
+            }
+        }
     }
-  }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'out/**', fingerprint: true
+            echo "Pipeline completed."
+        }
+    }
 }
